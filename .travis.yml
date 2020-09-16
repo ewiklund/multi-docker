@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t ewiklund/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true ewiklund/react-test npm test
+
+after_success:
+  - docker build -t ewiklund/multi-client ./client
+  - docker build -t ewiklund/multi-nginx ./nginx
+  - docker build -t ewiklund/multi-server ./server
+  - docker build -t ewiklund/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push ewiklund/multi-client
+  - docker push ewiklund/multi-nginx
+  - docker push ewiklund/multi-server
+  - docker push ewiklund/multi-worker
