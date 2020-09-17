@@ -21,15 +21,15 @@ after_success:
   - docker push ewiklund/multi-server
   - docker push ewiklund/multi-worker
 
-deploy:
-  provider: elasticbeanstalk
-  region: "eu-west-2"
-  app: "multi-docker"
-  env: "MultiDocker-env"
-  bucket_name: "elasticbeanstalk-eu-west-2-181181168369"
-  bucket_path: "docker-multi"
-  on:
-    branch: master
-  access_key_id: $AWS_ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
+// deploy:
+//  provider: elasticbeanstalk
+//  region: "eu-west-2"
+//  app: "multi-docker"
+//  env: "MultiDocker-env"
+//  bucket_name: "elasticbeanstalk-eu-west-2-181181168369"
+//  bucket_path: "docker-multi"
+//  on:
+//    branch: master
+//  access_key_id: $AWS_ACCESS_KEY_ID
+//  secret_access_key: $AWS_SECRET_ACCESS_KEY
  
